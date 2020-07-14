@@ -1,5 +1,5 @@
 # candidatePortal
-candidate portal
+assessment-portal-admin
 
 
 ## Install on ec2
