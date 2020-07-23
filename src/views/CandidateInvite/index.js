@@ -16,7 +16,6 @@ let domainNameUrl = `${endPoint.serviceEndPoint}assessments`;
 
 let url = `${endPoint.serviceEndPoint}registerCandidateScheduleAssessment`;
 
-
 class InviteCandidate extends React.Component {
 
   //setState({comment: 'Hello'});

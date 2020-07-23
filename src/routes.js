@@ -5,7 +5,8 @@ import Person from "@material-ui/icons/Person";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import InviteCandidate from "views/CandidateInvite";
-import QuestionManagement from "views/QuestionManagement";
+//import QuestionManagement from "views/QuestionManagement";
+import AddQuestions from "views/AddQuestions";
 import TableList from "views/TableList/TableList.js";
 // core components/views for RTL layout
 
@@ -34,6 +35,14 @@ const dashboardRoutes = [
     component: QuestionManagement,
     layout: "/admin"
   }, */
+  {
+    path: "/add-questions",
+    name: "Add Questions",
+    //rtlName: "ملف تعريفي للمستخدم",
+    icon:"content_paste",
+    component: AddQuestions,
+    layout: "/admin"
+  },
   {
     path: "/table",
     name: "View Status",
