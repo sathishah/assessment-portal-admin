@@ -4,31 +4,24 @@ import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import GridItem from "components/Grid/GridItem.js";
   
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import style from "./style.module.css";
-//import { makeStyles } from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
 import endPoint from "../../variables/app.url";
-
-//import InviteCandidate from './index - Copy';
 
 let domainNameUrl = `${endPoint.serviceEndPoint}assessments`;
 let domainNameQUrl = `${endPoint.serviceEndPoint}questionTypes`;
 
-let url = `${endPoint.uiEndPoint}questionOptionsAssessment`;
+let url = `${endPoint.serviceEndPoint}questionOptionsAssessment`;
 let questionId=0;
 //http://api.urlipaddress:8080/questionOptionsAssessment
+
+//http://3.20.222.19:8080/answers  //To get the answerId, can be 
+
 class InviteCandidate extends Component {
   state = {
     domains: [],
@@ -91,36 +84,35 @@ class InviteCandidate extends Component {
     let answer2 = document.getElementById("answer2").value;
     let answer3 = document.getElementById("answer3").value;
     let answer4 = document.getElementById("answer4").value;
-    let answerOption1 = document.getElementById("answerOption1").value;
-    let answerOption2 = document.getElementById("answerOption2").value;
-    let answerOption3 = document.getElementById("answerOption3").value;
-    let answerOption4 = document.getElementById("answerOption4").value;
-    
-    // let answerOption = (ans) =>{
-    // if(ans == null || ans == undefined){
-    //   ans='';
-    //   console.log('Hi')
-    // }
-    // }
-    // answerOption(answer1);
-    // answerOption(answer2);
-    // answerOption(answer3);
-    // answerOption(answer4);
+
+    const optionsAr = [];
+    let optionTrueCount = 0;
+
+    let answerOption1 = optionsAr[0] = document.getElementById("answerOption1").value;
+    let answerOption2 = optionsAr[1] = document.getElementById("answerOption2").value;
+    let answerOption3 = optionsAr[2] = document.getElementById("answerOption3").value;
+    let answerOption4 = optionsAr[3] = document.getElementById("answerOption4").value;
+
+    //console.log(optionsAr);
+
+    optionsAr.forEach(findTrueOptions);
+    function findTrueOptions(val, index) {
+      
+      if(val === "True"){
+        optionTrueCount++;
+      }
+      //console.log(optionTrueCount,val);
+    }
 
     
     var data = {
-      "questionDescription":this.state.question,
-      "answerId":answerId,
+      "header":this.state.question,
+      "answerId":1,
       "options":[
-        {"description":answer1,
-          "answerOption":answerOption1},
-          {"description":answer2,
-          "answerOption":answerOption2},
-          {"description":answer3,
-          "answerOption":answerOption3},
-          {"description":answer4,
-          "answerOption":answerOption4}
-
+        {"description":answer1,"answerOption":answerOption1},
+          {"description":answer2, "answerOption":answerOption2},
+          {"description":answer3, "answerOption":answerOption3},
+          {"description":answer4, "answerOption":answerOption4}
       ],
       "technology":this.state.technology,
       "questionTypeId": questionId,
@@ -130,21 +122,26 @@ class InviteCandidate extends Component {
     };
     console.log(data);
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin":
-          "Origin, X-Requested-With, Content-Type, Accept",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        alert("Mail send successfully");
-console.log(res)
+    if(optionTrueCount == 1){
+        fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin":
+            "Origin, X-Requested-With, Content-Type, Accept",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          alert("Question added successfully!");
+          console.log(res)
       });
+    }else{
+      alert("Please select 1 True option, can't more than 1");
+    }
+      
   }
 
   render() {
@@ -192,8 +189,8 @@ console.log(res)
                     <GridItem xs={12} sm={12} md={3}>
                     <div className={style.dropdownBool}>
                       <select id="answerOption1" className="form-control">
-                        <option value="True">True</option>
                         <option value="False">False</option>
+                        <option value="True">True</option>
                       </select>
                       </div>
                     </GridItem>
@@ -217,8 +214,8 @@ console.log(res)
                     <GridItem xs={12} sm={12} md={3}>
                     <div className={style.dropdownBool}>
                       <select id="answerOption2" className="form-control">
-                        <option value="True">True</option>
                         <option value="False">False</option>
+                        <option value="True">True</option>
                       </select>
                       </div>
                     </GridItem>
@@ -246,8 +243,8 @@ console.log(res)
                     <GridItem xs={12} sm={12} md={3}>
                     <div className={style.dropdownBool}>
                       <select id="answerOption3" className="form-control">
-                        <option value="True">True</option>
                         <option value="False">False</option>
+                        <option value="True">True</option>
                       </select>
                       </div>
                     </GridItem>
@@ -271,8 +268,8 @@ console.log(res)
                     <GridItem xs={12} sm={12} md={3}>
                       <div className={style.dropdownBool}>
                       <select id="answerOption4" className="form-control">
-                        <option value="True">True</option>
                         <option value="False">False</option>
+                        <option value="True">True</option>
                       </select>
                       </div>
                     </GridItem>
@@ -347,7 +344,7 @@ console.log(res)
               </Button>
               <Button
                 color="primary"
-                type="button"
+                type="reset"
                 variant="contained"
                 color="primary"
                 className={this.classes}

@@ -7,6 +7,8 @@ const app = {
     // uiEndPoint: `http://localhost:${uiPort}/`
     , serviceEndPoint: `http://3.20.222.19:${servicePort}/`
     //, serviceEndPoint: `http://localhost:${servicePort}/`
+
+    
 }
 
 export default app;
