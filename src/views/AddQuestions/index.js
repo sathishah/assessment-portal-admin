@@ -62,7 +62,7 @@ class InviteCandidate extends Component {
       })
       .then((data) => {
        questionId = data[0].id;
-        console.log(questionId);
+        //console.log(questionId);
       
        
       })
@@ -78,7 +78,7 @@ class InviteCandidate extends Component {
     //event.preventDefault();
     let questionTypeId = '';
     let answerId =  Math.floor(1000 + Math.random() * 9000);
-    console.log(answerId);
+   // console.log(answerId);
     let assessmentIds= Math.floor(1000 + Math.random() * 9000);
     let answer1 = document.getElementById("answer1").value;
     let answer2 = document.getElementById("answer2").value;
@@ -101,10 +101,10 @@ class InviteCandidate extends Component {
       if(val === "True"){
         optionTrueCount++;
       }
-      //console.log(optionTrueCount,val);
     }
-
-    
+    let questionChar = document.getElementById("question").value.length;
+    let selectedTechnology = this.state.technology;
+    let assignedMarks =  document.getElementById("marks").value.length;
     var data = {
       "header":this.state.question,
       "answerId":1,
@@ -122,24 +122,26 @@ class InviteCandidate extends Component {
     };
     console.log(data);
 
-    if(optionTrueCount == 1){
-        fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin":
-            "Origin, X-Requested-With, Content-Type, Accept",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          alert("Question added successfully!");
-          console.log(res)
-      });
+    if(optionTrueCount == 1 && questionChar >= 20 && selectedTechnology != undefined && assignedMarks >=1 ){
+      //   fetch(url, {
+      //   method: "POST",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Origin":
+      //       "Origin, X-Requested-With, Content-Type, Accept",
+      //   },
+      //   body: JSON.stringify(data),
+      // })
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     alert("Question added successfully!");
+      //     console.log(res)
+      // });
+      console.log("Inside If Block")
     }else{
-      alert("Please select 1 True option, can't more than 1");
+      alert("Please fill in all details !")
+      //alert("Please select 1 True option, can't more than 1");
     }
       
   }
@@ -158,6 +160,7 @@ class InviteCandidate extends Component {
                     <CustomInput
                       labelText="Question"
                       id="question"
+                      required="true"
                       formControlProps={{
                         fullWidth: true,
                       }}
