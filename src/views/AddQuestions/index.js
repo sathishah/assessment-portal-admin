@@ -123,21 +123,21 @@ class InviteCandidate extends Component {
     console.log(data);
 
     if(optionTrueCount == 1 && questionChar >= 20 && selectedTechnology != undefined && assignedMarks >=1 ){
-      //   fetch(url, {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Origin":
-      //       "Origin, X-Requested-With, Content-Type, Accept",
-      //   },
-      //   body: JSON.stringify(data),
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     alert("Question added successfully!");
-      //     console.log(res)
-      // });
+        fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin":
+            "Origin, X-Requested-With, Content-Type, Accept",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          alert("Question added successfully!");
+          console.log(res)
+      });
       console.log("Inside If Block")
     }else{
       alert("Please fill in all details !")
