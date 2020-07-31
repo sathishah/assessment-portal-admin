@@ -2,9 +2,11 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
+import QuestionAnswer from "@material-ui/icons/QuestionAnswer";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import InviteCandidate from "views/CandidateInvite";
+import ManageQuestions from "views/ManageQuestions";
 //import QuestionManagement from "views/QuestionManagement";
 import AddQuestions from "views/AddQuestions";
 import TableList from "views/TableList/TableList.js";
@@ -35,12 +37,21 @@ const dashboardRoutes = [
     component: QuestionManagement,
     layout: "/admin"
   }, */
+
   {
     path: "/add-questions",
     name: "Add Questions",
     //rtlName: "ملف تعريفي للمستخدم",
     icon:"content_paste",
     component: AddQuestions,
+    layout: "/admin"
+  },
+  {
+    path: "/manage-questions",
+    name: "Manage Questions",
+    // rtlName: "ملف تعريفي للمستخدم",
+    icon: QuestionAnswer,
+    component: ManageQuestions,
     layout: "/admin"
   },
   {
